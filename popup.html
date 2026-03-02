@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 250px; font-family: 'Segoe UI', Tahoma, sans-serif; padding: 15px; margin: 0; background: #f9f9f9; }
+    h3 { margin: 0 0 10px 0; font-size: 14px; color: #333; display: flex; align-items: center; gap: 8px; }
+    .status-dot { width: 8px; height: 8px; background: #bbb; border-radius: 50%; }
+    .status-active { background: #27ae60; box-shadow: 0 0 5px #27ae60; }
+    
+    input { 
+      width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; 
+      border-radius: 4px; box-sizing: border-box; font-size: 12px;
+    }
+    button { 
+      width: 100%; background: #000; color: white; border: none; 
+      padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold;
+    }
+    button:hover { background: #333; }
+    #msg { font-size: 11px; text-align: center; margin-top: 8px; color: #27ae60; min-height: 15px; }
+  </style>
+</head>
+<body>
+  <h3><div id="dot" class="status-dot"></div> WakaTime Google App Script</h3>
+  
+  <input type="password" id="apiKey" placeholder="Paste your API Key here...">
+  <button id="saveBtn">Save API key</button>
+  
+  <div id="msg"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
