@@ -3,7 +3,6 @@ const btn = document.getElementById('saveBtn');
 const msg = document.getElementById('msg');
 const dot = document.getElementById('dot');
 
-// 1. Al abrir el popup, cargar la clave si ya existe
 chrome.storage.sync.get('wakaKey', (data) => {
   if (data.wakaKey) {
     input.value = data.wakaKey;
@@ -12,7 +11,6 @@ chrome.storage.sync.get('wakaKey', (data) => {
   }
 });
 
-// 2. Guardar la clave al hacer clic
 btn.addEventListener('click', () => {
   const newKey = input.value.trim();
   

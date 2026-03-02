@@ -7,6 +7,7 @@ function b64EncodeUnicode(str) {
 async function sendHeartbeat() {
 
     const now = Date.now();
+    // Each 2 minutes send heartbeat if there is activity, otherwise skip to avoid sending too many heartbeats when user is idle
     if (now - lastHeartbeat < 120000) return;
 
     chrome.storage.sync.get('wakaKey', async (data) => {
@@ -25,6 +26,10 @@ async function sendHeartbeat() {
 
         const proyectName = document.title.split(' – ')[0] || "App Script Project"; // Find project name 
 
+        // Get Operating System string for user agent
+        const os = getOSString();
+        const userAgent = `wakatime/24.0.0 (${os}) Google-Apps-Script/1.0 google-apps-script-wakatime/1.0.0`;
+
         try {
             const response = await fetch("https://wakatime.com/api/v1/users/current/heartbeats", {
                 method: 'POST',
@@ -36,8 +41,12 @@ async function sendHeartbeat() {
                     "entity": currentFile,
                     "type": "file",
                     "project": proyectName,
-                    "plugin": "App Script",
-                    "time": now / 1000
+                    "category": "coding",
+                    "time": now / 1000,
+                    "language": "Google Apps Script",
+                    "editor": "Google Apps Script",
+                    "plugin": "google-apps-script-wakatime/1.0.0",
+                    "user_agent": userAgent
                 })
             });
 
@@ -55,6 +64,6 @@ async function sendHeartbeat() {
 
 document.addEventListener('keydown', () => {
     sendHeartbeat();
-}); // Each 2 minutes we send heartbeat to wakatime
+}); 
 
 sendHeartbeat();
