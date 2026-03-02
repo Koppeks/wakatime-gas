@@ -10,8 +10,9 @@ async function sendHeartbeat() {
     // Each 2 minutes send heartbeat if there is activity, otherwise skip to avoid sending too many heartbeats when user is idle
     if (now - lastHeartbeat < 120000) return;
 
-    chrome.storage.sync.get('wakaKey', async (data) => {
+    chrome.storage.sync.get(['wakaKey', 'hostname'], async (data) => {
         const apiKey = data.wakaKey;
+        const machineName = data.hostname || "Browser Google IDE";
 
         if (!apiKey) {
             console.warn("WakaTime GAS: API key not found. Add it in the extension options.");
@@ -35,7 +36,8 @@ async function sendHeartbeat() {
                 method: 'POST',
                 headers: {
                     'Authorization': `Basic ${b64EncodeUnicode(apiKey)}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "X-Machine-Name": machineName,
                 },
                 body: JSON.stringify({
                     "entity": currentFile,
@@ -46,7 +48,7 @@ async function sendHeartbeat() {
                     "language": "Google Apps Script",
                     "editor": "Google Apps Script",
                     "plugin": "google-apps-script-wakatime/1.0.0",
-                    "user_agent": userAgent
+                    "user_agent": userAgent,
                 })
             });
 
