@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "WakaTime para Google Apps Script",
+  "version": "0.1",
+  "description": "Track time inside GAS editor with WakaTime",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://script.google.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
