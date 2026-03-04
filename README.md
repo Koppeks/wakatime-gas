@@ -135,6 +135,9 @@ Open an issue on [GitHub Issues](https://github.com/Koppeks/wakatime-google-apps
 
 ---
 
+### 📂 Related Repositories
+Check out the [Wakatime For Apps Script SPA](https://github.com/Koppeks/wakatime-gas-spa) - The single page application that showcase the extension.
+
 ## Acknowledgements
 
 - [WakaTime](https://wakatime.com) for their open API and plugin documentation
